@@ -31,7 +31,7 @@ public class OMISRecoverBytesDebugMono : MonoBehaviour
         public byte m_b2;
         public byte m_b3;
         public byte m_b4;
-        public string m_charAsString;
+        public char m_charAsString;
         public int m_countBytes;
         public float [] m_allFloat;
     }
@@ -43,6 +43,8 @@ public class OMISRecoverBytesDebugMono : MonoBehaviour
 
 
     public void PushIn(byte[] bytes) {
+        if (bytes == null)
+            return;
 
         if (bytes.Length <= 5)
             return;
@@ -108,11 +110,21 @@ public class OMISRecoverBytesDebugMono : MonoBehaviour
 
     }
 
-    public string ConvertBytesToStringChar(byte b0, byte b1, byte b2, byte b3)
+    public char ConvertBytesToStringChar(byte b0, byte b1, byte b2, byte b3)
     {
-        byte[] utf8Bytes = { b0,  b1,  b2,  b3 };
-        return Encoding.UTF8.GetString(utf8Bytes);
+            byte[] utf8Bytes = { b0, b1, b2, b3 };
+            return ConvertToChar(utf8Bytes);
+
+       
+    }
+    static char ConvertToChar(byte[] byteArray)
+    {
+      
+
+        int intValue = BitConverter.ToInt32(byteArray, 0);
+        char resultChar = (char)intValue;
+
+        return resultChar;
     }
 
-   
 }
