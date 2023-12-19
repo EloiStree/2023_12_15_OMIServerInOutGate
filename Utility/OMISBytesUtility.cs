@@ -9,7 +9,7 @@ public class OMISBytesUtility {
     #region BYTE TO PRIMITIVE
     public static byte[] ConvertCharToByteArray(char character)
     {
-        Encoding encoding = Encoding.UTF8;
+        Encoding encoding = Encoding.Unicode;
         byte[] byteArray = encoding.GetBytes(new char[] { character });
 
         return byteArray;

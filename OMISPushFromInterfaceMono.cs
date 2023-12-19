@@ -128,7 +128,7 @@ public class OMISPushFromInterfaceMono : MonoBehaviour
     {
         if (i != null)
         {
-            string c= i.GetUniqueCharId();
+            char c= i.GetUniqueCharId()[0];
             i.GetArray(out bool[] b, out string[] bn);
             i.GetArray(out float[] f, out string[] fn);
             i.GetArray(out Vector3[] v, out string[] vn);
@@ -172,9 +172,9 @@ public class OMISPushFromInterfaceMono : MonoBehaviour
     }
 
 
-    public static byte[] Append(byte idOfBytes, string givenCharId, byte[] bytes) {
+    public static byte[] Append(byte idOfBytes, char givenCharId, byte[] bytes) {
 
-        byte[] byteArray = OMISBytesUtility.ConvertCharToByteArray(givenCharId[0]);
+        byte[] byteArray = OMISBytesUtility.ConvertCharToByteArray(givenCharId);
         byte[] result = new byte[bytes.Length + 5];
         result[0] = idOfBytes;
         for (int i = 0; i < byteArray.Length; i++)
