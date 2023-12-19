@@ -112,7 +112,6 @@ public class OMISRecoverBytesDebugMono : MonoBehaviour
 
     public char ConvertBytesToStringChar(byte b0, byte b1, byte b2, byte b3)
     {
-<<<<<<< HEAD
         byte[] utf8Bytes = { b0, b1, b2, b3 };
         return ConvertToChar(utf8Bytes);
 
@@ -120,17 +119,7 @@ public class OMISRecoverBytesDebugMono : MonoBehaviour
     }
     static char ConvertToChar(byte[] byteArray)
     {
-
-=======
-            byte[] utf8Bytes = { b0, b1, b2, b3 };
-            return ConvertToChar(utf8Bytes);
-
-       
-    }
-    static char ConvertToChar(byte[] byteArray)
-    {
       
->>>>>>> 783e7ac8ceb9754e32d90049f8a4b558d70aa98b
 
         int intValue = BitConverter.ToInt32(byteArray, 0);
         char resultChar = (char)intValue;
@@ -138,8 +127,5 @@ public class OMISRecoverBytesDebugMono : MonoBehaviour
         return resultChar;
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 783e7ac8ceb9754e32d90049f8a4b558d70aa98b
 }
