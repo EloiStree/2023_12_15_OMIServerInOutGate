@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TransformNamedGroupsToOMISMono : MonoBehaviour, I_GetPrimitiveArrayToPush
 {
-    public string m_charUniqueid="$";
+    public char m_charUniqueid ='$';
     public TransformNamedGroupsOMISMono m_source;
     public bool m_pushPositions=true;
     public bool m_pushRotations=false;
@@ -42,7 +42,7 @@ public class TransformNamedGroupsToOMISMono : MonoBehaviour, I_GetPrimitiveArray
         }
     }
 
-    public string GetUniqueCharId()
+    public char GetUniqueCharId()
     {
         return m_charUniqueid;
     }

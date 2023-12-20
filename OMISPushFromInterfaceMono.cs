@@ -33,6 +33,8 @@ public class OMISPushFromInterfaceMono : MonoBehaviour
 
     public bool m_useStartToPush=true;
     public bool m_useUpdateToPush = true;
+    public bool m_usePushNameSometime = true;
+    public float m_pushNameEverySeconds = 5;
 
     private void Start()
     {
@@ -43,6 +45,8 @@ public class OMISPushFromInterfaceMono : MonoBehaviour
         I_GetPrimitiveArrayToPush i = m_source.GetComponent<I_GetPrimitiveArrayToPush>();
         PushNames(i);
         m_onStartPush.Invoke();
+        if (m_usePushNameSometime)
+            InvokeRepeating("PushNames", m_pushNameEverySeconds, m_pushNameEverySeconds);
     }
 
     [ContextMenu("Push names")]
@@ -89,7 +93,7 @@ public class OMISPushFromInterfaceMono : MonoBehaviour
         if (i != null)
         {
 
-            string c = i.GetUniqueCharId();
+            char c = i.GetUniqueCharId();
             i.GetArray(out bool[]       b         , out string[] bn);
             i.GetArray(out float[]      f        , out string[] fn);
             i.GetArray(out Vector3[]    v      , out string[] vn);
@@ -124,40 +128,112 @@ public class OMISPushFromInterfaceMono : MonoBehaviour
         }
     }
 
-    private  void PushValues(I_GetPrimitiveArrayToPush i)
+    public void PushFloatValues()
+    {
+
+
+        if (m_source == null)
+            return;
+        I_GetPrimitiveArrayToPush i = m_source.GetComponent<I_GetPrimitiveArrayToPush>();
+        PushFloatValues(i);
+
+    }
+    public void PushFloatValues(I_GetPrimitiveArrayToPush i)
     {
         if (i != null)
         {
-            char c= i.GetUniqueCharId()[0];
-            i.GetArray(out bool[] b, out string[] bn);
+            char c = i.GetUniqueCharId();
             i.GetArray(out float[] f, out string[] fn);
-            i.GetArray(out Vector3[] v, out string[] vn);
-            i.GetArray(out Quaternion[] q, out string[] qn);
-
-            if (bn != null && bn.Length > 0)
-            {
-                m_bnb =Append(4,c, OMISBytesUtility.ConvertBoolArrayToByteArray(b));
-                m_boolByteCount         = m_bnb.Length;
-                PushBytes(m_bnb);
-            }
             if (fn != null && fn.Length > 0)
             {
-                m_fnb =Append(5,c, OMISBytesUtility.ConvertFloatToBytes(f));
-                m_floatByteCount        = m_fnb.Length;
+                m_fnb = Append(5, c, OMISBytesUtility.ConvertFloatToBytes(f));
+                m_floatByteCount = m_fnb.Length;
                 PushBytes(m_fnb);
             }
+        }
+    }
+    public void PushBoolValues()
+    {
+
+
+        if (m_source == null)
+            return;
+        I_GetPrimitiveArrayToPush i = m_source.GetComponent<I_GetPrimitiveArrayToPush>();
+        PushBoolValues(i);
+
+    }
+    public void PushBoolValues(I_GetPrimitiveArrayToPush i)
+    {
+        if (i != null)
+        {
+            char c = i.GetUniqueCharId();
+            i.GetArray(out bool[] b, out string[] bn);
+            if (bn != null && bn.Length > 0)
+            {
+                m_bnb = Append(4, c, OMISBytesUtility.ConvertBoolArrayToByteArray(b));
+                m_boolByteCount = m_bnb.Length;
+                PushBytes(m_bnb);
+            }
+        }
+    }
+    public void PushVector3Values()
+    {
+
+
+        if (m_source == null)
+            return;
+        I_GetPrimitiveArrayToPush i = m_source.GetComponent<I_GetPrimitiveArrayToPush>();
+        PushVector3Values(i);
+
+    }
+    public void PushVector3Values(I_GetPrimitiveArrayToPush i)
+    {
+        if (i != null)
+        {
+            char c = i.GetUniqueCharId();
+            i.GetArray(out Vector3[] v, out string[] vn);
             if (vn != null && vn.Length > 0)
             {
-                m_vnb =Append(6,c, OMISBytesUtility.ConvertVectorToBytes(v));
-                m_vectorByteCount       = m_vnb.Length;
+                m_vnb = Append(6, c, OMISBytesUtility.ConvertVectorToBytes(v));
+                m_vectorByteCount = m_vnb.Length;
                 PushBytes(m_vnb);
             }
+        }
+    }
+
+    public void PushQuaternionValues()
+    {
+
+
+        if (m_source == null)
+            return;
+        I_GetPrimitiveArrayToPush i = m_source.GetComponent<I_GetPrimitiveArrayToPush>();
+        PushQuaternionValues(i);
+
+    }
+    public void PushQuaternionValues(I_GetPrimitiveArrayToPush i)
+    {
+        if (i != null)
+        {
+            char c = i.GetUniqueCharId();
+            i.GetArray(out Quaternion[] q, out string[] qn);
             if (qn != null && qn.Length > 0)
             {
-                m_qnb =Append(7, c, OMISBytesUtility.ConvertQuaternionToBytes(q));
-                m_quaternoinByteCount   = m_qnb.Length;
+                m_qnb = Append(7, c, OMISBytesUtility.ConvertQuaternionToBytes(q));
+                m_quaternoinByteCount = m_qnb.Length;
                 PushBytes(m_qnb);
             }
+        }
+    }
+
+    private void PushValues(I_GetPrimitiveArrayToPush i)
+    {
+        if (i != null)
+        {
+            PushBoolValues(i);
+            PushFloatValues(i);
+            PushVector3Values(i);
+            PushQuaternionValues(i);
         }
     }
 

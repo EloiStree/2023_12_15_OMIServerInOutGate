@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TDD_RandomPushToOMISMono : MonoBehaviour, I_GetPrimitiveArrayToPush
 {
-    public string m_charUniqueid="ù";
+    public char m_charUniqueid ='ù';
     public TDD_RandomPushOMISMono m_source;
 
     public float m_timeBetweenRandomizing=1;
@@ -42,7 +42,7 @@ public class TDD_RandomPushToOMISMono : MonoBehaviour, I_GetPrimitiveArrayToPush
         namedId = m_source.m_quaternionValues.Select(k => k.m_name).ToArray();
     }
 
-    public string GetUniqueCharId()
+    public char GetUniqueCharId()
     {
         return m_charUniqueid;
     }
