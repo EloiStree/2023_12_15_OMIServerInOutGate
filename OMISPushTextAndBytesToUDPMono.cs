@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 
-public class OMISPushToUDPMono : MonoBehaviour
+public class OMISPushTextAndBytesToUDPMono : MonoBehaviour
 {
     public string m_ip="192.168.1.250";
     public int m_port=2571;
